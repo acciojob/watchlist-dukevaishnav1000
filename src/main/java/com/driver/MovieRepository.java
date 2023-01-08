@@ -109,4 +109,12 @@ class MovieRepository {
         }
         return new ResponseEntity<String>("success",HttpStatus.OK);
     }
+
+    public ResponseEntity<String> deleteAllDirectors()
+    {
+        List<Movie> li=db.get(null);
+        db=new HashMap<Director, List<Movie>>();
+        db.put(null,li);
+        return new ResponseEntity<>("success",HttpStatus.OK);
+    }
 }

@@ -50,4 +50,9 @@ public class MovieService {
     public ResponseEntity<String> deleteDirectorByName(String name) {
         return mr.deleteDirectorByName(name);
     }
+
+    public ResponseEntity<String> deleteAllDirectors()
+    {
+        return mr.deleteAllDirectors();
+    }
 }

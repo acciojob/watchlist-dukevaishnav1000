@@ -42,4 +42,12 @@ public class MovieService {
     public ResponseEntity<List<String>> getMoviesByDirectorName(String dir){
         return mr.getMoviesByDirectorName(dir);
     }
+
+    public ResponseEntity<List<String>> getAllMovies(){
+        return mr.getAllMovies();
+    }
+
+    public ResponseEntity<String> deleteDirectorByName(String name) {
+        return mr.deleteDirectorByName(name);
+    }
 }

@@ -40,4 +40,14 @@ public class MovieController {
     public ResponseEntity<List<String>> getMoviesByDirectorName(@PathVariable("name") String director){
         return movieService.getMoviesByDirectorName(director);
     }
+
+    @GetMapping("/movies/get-all-movies")
+    public ResponseEntity<List<String>> getAllMovies(){
+        return movieService.getAllMovies();
+    }
+
+    @GetMapping("/movies/delete-director-by-name")
+    public ResponseEntity<String> deleteDirectorByName(@RequestParam("name")String name){
+        return movieService.deleteDirectorByName(name);
+    }
 }

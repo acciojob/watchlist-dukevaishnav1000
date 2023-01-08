@@ -86,4 +86,27 @@ class MovieRepository {
         }
         return null;
     }
+
+    public ResponseEntity<List<String>> getAllMovies()
+    {
+        List <Movie> li=db.get(null);
+        List<String> listring=null;
+        for(int i=0;i<li.size();i++)
+        {
+            listring.add(li.get(i).getName());
+        }
+        return new ResponseEntity<List<String>>(listring,HttpStatus.OK);
+    }
+
+    public ResponseEntity<String> deleteDirectorByName(String name)
+    {
+        for(Map.Entry<Director,List<Movie>> mp: db.entrySet()){
+            if(mp.getKey().getName().equals(name))
+            {
+                db.remove(mp.getKey());
+                return new ResponseEntity<String>("success",HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<String>("success",HttpStatus.OK);
+    }
 }

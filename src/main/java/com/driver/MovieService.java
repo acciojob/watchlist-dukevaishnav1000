@@ -39,7 +39,7 @@ public class MovieService {
         return mr.getMovieByName(movie);
     }
 
-    public ResponseEntity<List<Movie>> getMoviesByDirectorName(String dir){
+    public ResponseEntity<List<String>> getMoviesByDirectorName(String dir){
         return mr.getMoviesByDirectorName(dir);
     }
 }

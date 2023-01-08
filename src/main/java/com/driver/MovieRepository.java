@@ -43,7 +43,6 @@ class MovieRepository {
                     db.put(mp.getKey(),li);
                 return new ResponseEntity<String>("success", HttpStatus.OK);
             }
-
         }
         return new ResponseEntity<String>("success", HttpStatus.OK);
         }
@@ -71,11 +70,19 @@ class MovieRepository {
         return null;
     }
 
-    public ResponseEntity<List<Movie>> getMoviesByDirectorName(String dir)
+    public ResponseEntity<List<String>> getMoviesByDirectorName(String dir)
     {
+        List <String> li=null;
         for(Map.Entry<Director,List<Movie>> mp:db.entrySet()){
             if(mp.getKey().getName().equals(dir))
-                return new ResponseEntity<List<Movie>>(mp.getValue(),HttpStatus.OK) ;
+            {
+                for(int i=0;i<mp.getValue().size();i++)
+                {
+                    li.add(mp.getValue().get(i).getName());
+                }
+                return new ResponseEntity<List<String>>(li,HttpStatus.OK) ;
+            }
+
         }
         return null;
     }

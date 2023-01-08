@@ -16,11 +16,14 @@ class MovieRepository {
 
     public ResponseEntity<String> addMovie(Movie m) {
 
-        if (!db.get(null).contains(m)) {
-            List <Movie>li = db.get(null);
-            li.add(m);
-            db.put(null, li);
+        List<Movie> li=db.get(null);
+        for(int i=0;i<li.size();i++){
+            if(li.get(i).getName().equals(m.getName()))
+                return new ResponseEntity("success", HttpStatus.OK);
         }
+
+        li.add(m);
+        db.put(null,li);
         return new ResponseEntity("success", HttpStatus.OK);
 
     }
@@ -31,28 +34,25 @@ class MovieRepository {
     }
 
     public ResponseEntity<String> addMovieDirectorPair(Movie movie, Director director) {
-        if (db.get(director) == null) {
-            List <Movie>li = new ArrayList<Movie>();
-            li.add(movie);
-            db.put(director, li);
-        } else {
-            List <Movie>li = db.get(director);
-            li.add(movie);
-            db.put(director, li);
-        }
 
-        if (db.get(null).contains(movie)) {
-            List <Movie>li = db.get(null);
-            li.remove(movie);
-            db.put(null, li);
+        for (Map.Entry<Director, List<Movie>> mp : db.entrySet()) {
+            if (mp.getKey().getName().equals(director.getName()))
+            {
+                    List <Movie> li=mp.getValue();
+                    li.add(movie);
+                    db.put(mp.getKey(),li);
+                return new ResponseEntity<String>("success", HttpStatus.OK);
+            }
+
         }
         return new ResponseEntity<String>("success", HttpStatus.OK);
-    }
+        }
+
 
     public ResponseEntity<Director> getDirectorByName(String director) {
 
         for (Map.Entry<Director, List<Movie>> mp : db.entrySet()) {
-            if (mp.getKey().name.equals(director))
+            if (mp.getKey().getName().equals(director))
                 return new ResponseEntity<Director>(mp.getKey(), HttpStatus.OK);
         }
             return null;
@@ -64,11 +64,19 @@ class MovieRepository {
             List <Movie>l=mp.getValue();
 
             for(int i=0;i<l.size();i++) {
-                if (l.get(i).getName().equals(movie))
+                if (l.get(i).getName().equals(movie) && mp.getKey()!=null )
                     return new ResponseEntity(l.get(i), HttpStatus.OK);
             }
         }
         return null;
     }
 
+    public ResponseEntity<List<Movie>> getMoviesByDirectorName(String dir)
+    {
+        for(Map.Entry<Director,List<Movie>> mp:db.entrySet()){
+            if(mp.getKey().getName().equals(dir))
+                return new ResponseEntity<List<Movie>>(mp.getValue(),HttpStatus.OK) ;
+        }
+        return null;
+    }
 }

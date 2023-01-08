@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class MovieController {
 
@@ -32,5 +34,10 @@ public class MovieController {
     @GetMapping("/movies/get-movie-by-name/{name}")
     public ResponseEntity<Movie> getMovieByName(@PathVariable("name") String movie){
         return movieService.getMovieByName(movie);
+    }
+
+    @GetMapping("/movies/get-movies-by-director-name/{name}")
+    public ResponseEntity<List<Movie>> getMoviesByDirectorName(@PathVariable("name") String director){
+        return movieService.getMoviesByDirectorName(director);
     }
 }

@@ -10,9 +10,10 @@ public class Movie {
 
     }
 
-    public Movie(int durationInMinutes, double imdbRating) {
+    public Movie(String name,int durationInMinutes, double imdbRating) {
         this.durationInMinutes = durationInMinutes;
         this.imdbRating = imdbRating;
+        this.name=name;
     }
 
     public int getDurationInMinutes() {

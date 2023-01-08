@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MovieService {
 
@@ -15,6 +17,7 @@ public class MovieService {
 
 }
     public ResponseEntity<String> addDirector(Director d){
+
         return mr.addDirector(d);
     }
 
@@ -36,4 +39,7 @@ public class MovieService {
         return mr.getMovieByName(movie);
     }
 
+    public ResponseEntity<List<Movie>> getMoviesByDirectorName(String dir){
+        return mr.getMoviesByDirectorName(dir);
+    }
 }
